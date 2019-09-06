@@ -88,7 +88,7 @@ void WiFiSetupClass::begin(WiFiMode mode, char const *ssid,const char *passwd)
 	_apPassword=(passwd !=NULL && *passwd=='\0')? NULL:passwd;
 
 	// let the underlined library do the reconnection jobs.
-	WiFi.setAutoConnect(_autoReconnect);
+	// WiFi.setAutoConnect(_autoReconnect);
 
 	WiFi.mode(_mode);
 	// start AP
@@ -167,9 +167,9 @@ String WiFiSetupClass::status(void){
 
 bool WiFiSetupClass::stayConnected(void)
 {
-	if(_apMode){
+	if(_mode == WIFI_AP || _mode == WIFI_AP_STA){
 		dnsServer->processNextRequest();
-		return true;
+		if(_mode == WIFI_AP) return true;
 	}
 	
 	if(_wifiState==WiFiStateChangeConnectPending){

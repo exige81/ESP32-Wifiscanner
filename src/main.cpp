@@ -28,6 +28,11 @@ void setup() {
 }
 
 void loop() {
-  delay(10000);
-  WiFi.printDiag(Serial);
+  String command = Serial.readString();
+
+  if (command == "s"){
+    WiFiSetup.scanWifi();
+  }
+  // delay(10000)
+  // WiFi.printDiag(Serial);
 }
